@@ -24,7 +24,7 @@ class OrderController extends Controller
             $orders = DB::table('orders')->get();
         } else {
             // получение заказов только обычному юзеру и только его
-            $orders = Order::where('user_id', $request->user()->id)->get();
+            $orders = DB::table('orders')->where('user_id', $request->user()->id)->get();
         }
         $arr = [];
         for ($i = 0; $i < count($orders); $i++) {

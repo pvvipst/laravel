@@ -50,7 +50,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/change-status/{id}', [App\Http\Controllers\API\OrderController::class, 'changeStatus']);
     // --------------
 
-    // ---- заказ
+    // ---- feedback
     Route::get('/feedback', [App\Http\Controllers\API\FeedbackController::class, 'getAll']);
     Route::get('/feedback/{id}', [App\Http\Controllers\API\FeedbackController::class, 'changeStatus']);
     // --------------
