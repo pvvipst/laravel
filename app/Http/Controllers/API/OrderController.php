@@ -80,7 +80,6 @@ class OrderController extends Controller
     public function changeStatus(Request $request, $id): JsonResponse
     {
         if ($this->isAdmin($request->user())) {
-
             $validate = Validator::make($request->all(), [
                 'status' => 'required|integer'
             ]);
@@ -96,6 +95,7 @@ class OrderController extends Controller
 
             $orders->status = $request->status;
             $orders->save();
+
             $ord = explode(',', $orders->prod_and_count);
             $arr2 = [];
             for ($j = 0; $j < count($ord) - 1; $j++) {
