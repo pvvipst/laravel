@@ -41,6 +41,12 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::delete('/product/{id}', [App\Http\Controllers\API\ProductController::class, 'delete']);
     // --------------
 
+    // ---- заказ
+    Route::get('/order', [App\Http\Controllers\API\OrderController::class, 'getAll']);
+    Route::post('/order', [App\Http\Controllers\API\OrderController::class, 'create']);
+//    Route::delete('/product/{id}', [App\Http\Controllers\API\ProductController::class, 'delete']);
+    // --------------
+
     // ---- выход
     Route::get('/logout', function (Request $request) {
         auth()->user()->tokens()->delete();
