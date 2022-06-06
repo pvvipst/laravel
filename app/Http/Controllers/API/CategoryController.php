@@ -43,7 +43,7 @@ class CategoryController extends Controller
             // валидации
             $validate = Validator::make($request->all(),
                 [
-                    'name' => 'required|string|min:5',
+                    'name' => 'required|string|min:2',
                 ],
                 [
                     'required' => 'Необходимо указать :attribute.',

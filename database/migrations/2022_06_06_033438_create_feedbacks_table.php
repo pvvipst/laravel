@@ -17,6 +17,7 @@ class CreateFeedbacksTable extends Migration
             $table->id();
             $table->string('fio');
             $table->string('phone');
+            $table->integer('status')->default(0);
             $table->timestamps();
         });
     }
