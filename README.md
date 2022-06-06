@@ -481,3 +481,30 @@ response: {
     }
 }
 ```
+
+# Feedback
+
+## create
+
+```
+url: $baseUrl/feedback
+method: POST
+request: {
+    fio: required|string|min:5
+    phone: required|string|min:8
+}
+response: {
+    200: {
+        data: {
+            items: {
+               product_id: number
+               count: number 
+            }[]  
+            status: number
+        }[]
+    }
+    401: {
+        message: string
+    }
+}
+```

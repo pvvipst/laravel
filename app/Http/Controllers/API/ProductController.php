@@ -95,14 +95,14 @@ class ProductController extends Controller
             }
 
             if (Category::find($request->category_id) === null) {
-                return response()->json(['message' => ['category_id'=>'Не найдена категория']], 404);
+                return response()->json(['message' => 'Не найдена категория'], 404);
             }
 
             // добавление
 
             $prod = Product::find($id);
             if ($prod === null) {
-                return response()->json(['message' => ['category_id'=>'Не найден такой товар']], 404);
+                return response()->json(['message' => 'Не найден такой товар'], 404);
             }
 
             $prod->category_id = $request->category_id;

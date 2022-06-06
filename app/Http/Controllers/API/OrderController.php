@@ -34,7 +34,7 @@ class OrderController extends Controller
                 $tt = explode('=>', $ord[$j]);
                 $arr2[] = ['product' => Product::find($tt[0]), 'count' => $tt[1]];
             }
-            $arr[] = ['items' => $arr2, 'status' => $orders[$i]->status];
+            $arr[] = ['id'=> $orders[$i]->id,'items' => $arr2, 'status' => $orders[$i]->status];
         }
         return response()->json(['data' => $arr]);
     }
