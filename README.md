@@ -496,14 +496,57 @@ request: {
 response: {
     200: {
         data: {
-            items: {
-               product_id: number
-               count: number 
-            }[]  
+            id: number
+            fio: string
+            phone: string
+            created_at: timestamp,
+            updated_at: timestamp
+        }
+    }
+}
+```
+
+## get all
+
+```
+url: $baseUrl/feedback
+method: GET
+response: {
+    200: {
+        data: {
+            id: number
+            fio: string
+            phone: string
             status: number
+            created_at: timestamp,
+            updated_at: timestamp
         }[]
     }
     401: {
+        message: string
+    }
+    403: {
+        message: string
+    }
+}
+```
+
+## change status
+
+```
+url: $baseUrl/feedback/{id}
+method: GET
+response: {
+    200: {
+        message: string
+    }
+    401: {
+        message: string
+    }
+    403: {
+        message: string
+    }
+    404: {
         message: string
     }
 }
