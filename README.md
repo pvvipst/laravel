@@ -12,7 +12,7 @@ url: $baseUrl/signup
 method: POST
 request: {
     data: {
-        fio: user
+        fio: required|string|min:5
         login: required|string|min:5|unique
         password: required|string|min:8
     }
@@ -181,6 +181,9 @@ response: {
             created_at: timestamp,
         },
     }
+    401: {
+        message: string
+    }
     403: {
          message: string
     }
@@ -212,6 +215,9 @@ response: {
             created_at: timestamp,
         },
     }
+    401: {
+        message: string
+    }
     403: {
          message: string
     }
@@ -233,6 +239,9 @@ headers: {
 }
 response: {
     200: {
+        message: string
+    }
+    401: {
         message: string
     }
     403: {
@@ -295,6 +304,9 @@ response:{
             updated_at: timestamp
         }
     }
+    401: {
+        message: string
+    }
     403: {
          message: string
     }
@@ -339,6 +351,9 @@ response: {
             updated_at: timestamp
         }
     }
+    401: {
+        message: string
+    }
     403: {
          message: string
     }
@@ -365,11 +380,61 @@ response: {
     200: {
         message: string
     }
+    401: {
+        message: string
+    }
     403: {
          message: string
     }
     404: {
          message: string
+    }
+}
+```
+
+# Order
+
+## all
+
+```
+url: $baseUrl/product
+method: GET
+headers: {
+    authorization: $access_token
+}
+response: {
+    200: {
+        data: {
+            product_id: number
+            count: number
+        }[][]
+    }
+    401: {
+        message: string
+    }
+}
+```
+
+## create
+
+```
+url: $baseUrl/product
+method: POST
+headers: {
+    authorization: $access_token
+}
+response: {
+    200: {
+        data: {
+            product_id: number
+            count: number
+        }[]
+    }
+    401: {
+        message: string
+    }
+    404: {
+        message: string
     }
 }
 ```
