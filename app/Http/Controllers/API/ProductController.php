@@ -26,14 +26,11 @@ class ProductController extends Controller
         return $this->onSuccess($prod);
     }
 
-    public function getOne($id): JsonResponse
+    public function getOne($id)
     {
-        $prod = Product::find($id)->get();
-
-        for ($i = 0; $i < count($prod); $i++) {
-            $cat = Category::find($prod[$i]->category_id);
-            $prod[$i]->category_id = $cat->name;
-        }
+        $prod = Product::find($id);
+        $cat = Category::find($prod->category_id);
+        $prod->category_id = $cat->name;
         return $this->onSuccess($prod);
     }
 
@@ -63,7 +60,7 @@ class ProductController extends Controller
             }
 
             if (Category::find($request->category_id) === null) {
-                return response()->json(['message' => ['category_id'=>'Не найдена категория']], 404);
+                return response()->json(['message' => ['category_id' => 'Не найдена категория']], 404);
             }
 
             // добавление
@@ -142,12 +139,12 @@ class ProductController extends Controller
             $prod = Product::find($id);
 
             if ($prod === null) {
-                return response()->json(['message'=>'Товар не найден'], 404);
+                return response()->json(['message' => 'Товар не найден'], 404);
             }
 
             $prod->delete();
 
-            return response()->json(['message'=>'Успешно удален']);
+            return response()->json(['message' => 'Успешно удален']);
         }
         return $this->forbidden();
     }
