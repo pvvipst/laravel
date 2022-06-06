@@ -397,7 +397,7 @@ response: {
 ## all
 
 ```
-url: $baseUrl/product
+url: $baseUrl/order
 method: GET
 headers: {
     authorization: $access_token
@@ -405,9 +405,12 @@ headers: {
 response: {
     200: {
         data: {
-            product_id: number
-            count: number
-        }[][]
+            items: {
+               product_id: number
+               count: number 
+            }[]  
+            status: number
+        }[]
     }
     401: {
         message: string
@@ -418,10 +421,37 @@ response: {
 ## create
 
 ```
-url: $baseUrl/product
+url: $baseUrl/order
 method: POST
 headers: {
     authorization: $access_token
+}
+response: {
+    200: {
+        data: {
+            product_id: number
+            count: number
+        }[]
+    }
+    401: {
+        message: string
+    }
+    404: {
+        message: string
+    }
+}
+```
+
+## change status
+
+```
+url: $baseUrl/change-status
+method: POST
+headers: {
+    authorization: $access_token
+}
+request: {
+    status: required|integer
 }
 response: {
     200: {

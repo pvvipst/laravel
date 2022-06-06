@@ -44,7 +44,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     // ---- заказ
     Route::get('/order', [App\Http\Controllers\API\OrderController::class, 'getAll']);
     Route::post('/order', [App\Http\Controllers\API\OrderController::class, 'create']);
-//    Route::delete('/product/{id}', [App\Http\Controllers\API\ProductController::class, 'delete']);
+    Route::post('/change-status/{id}', [App\Http\Controllers\API\OrderController::class, 'changeStatus']);
     // --------------
 
     // ---- выход
