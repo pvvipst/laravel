@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Http\Library\ApiHelpers;
 use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -13,6 +14,20 @@ use Illuminate\Support\Facades\Validator;
 class CategoryController extends Controller
 {
     use ApiHelpers;
+
+    public function prodInCategory($id): JsonResponse
+    {
+        if (Category::find($id) === null) {
+            return response()->json(['massage'=>'Категория не найдена'], 404);
+        }
+        $prod = Product::where('category_id', $id)->get();
+
+        for ($i = 0; $i < count($prod); $i++) {
+            $cat = Category::find($prod[$i]->category_id);
+            $prod[$i]->category_id = $cat->name;
+        }
+        return $this->onSuccess($prod);
+    }
 
     // получение всех категорий
     public function getAll(Request $request): JsonResponse

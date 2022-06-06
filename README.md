@@ -119,7 +119,32 @@ response: {
 
 # Category
 
-## get all
+## product in category
+
+```
+url: $baseUrl/category/product/{id}
+method: GET
+response: {
+    200: {
+        data: {
+            id: number,
+            category_id: string,
+            name: string,
+            price: number,
+            description: string,
+            size: string,
+            count: number,
+            created_at: timestamp,
+            updated_at: timestamp
+        }[]
+    }
+    404: {
+         message: string
+    }
+}
+```
+
+## all
 
 ```
 url: $baseUrl/category
@@ -131,7 +156,7 @@ response: {
             name: strung
             updated_at: timestamp,
             created_at: timestamp,
-        },
+        }[]
     }
 }
 ```
@@ -148,7 +173,7 @@ request: {
     name: required|string|min:5
 }
 response: {
-    200: {
+    201: {
         data: {
             id: integer
             name: strung
@@ -211,6 +236,139 @@ response: {
         message: string
     }
     403: {
+         message: string
+    }
+}
+```
+
+# Product
+
+## all
+
+```
+url: $baseUrl/product
+method: GET
+response: {
+    200: {
+        data: {
+            id: number,
+            category_id: string,
+            name: string,
+            price: number,
+            description: string,
+            size: string,
+            count: number,
+            created_at: timestamp,
+            updated_at: timestamp
+        }[]
+    }
+}
+```
+
+## create
+
+```
+url: $baseUrl/product
+method: POST
+headers: {
+    authorization: $access_token
+}
+request: {
+    category_id: 'required|integer
+    name: required|string|min:5
+    price: required|integer
+    descriptio: required|string|min:15
+    count: required|integer
+    size: required|string
+}
+response:{
+    201: {
+        data: {
+            id: number,
+            category_id: string,
+            name: string,
+            price: number,
+            description: string,
+            size: string,
+            count: number,
+            created_at: timestamp,
+            updated_at: timestamp
+        }
+    }
+    403: {
+         message: string
+    }
+    404: {
+         message: string
+    }
+    422: {
+        message: {
+            [field]: sting
+        }
+    }
+}
+```
+
+## update
+
+```
+url: $baseUrl/product/{id}
+method: PATCH
+headers: {
+    authorization: $access_token
+}
+request: {
+    category_id: 'required|integer
+    name: required|string|min:5
+    price: required|integer
+    descriptio: required|string|min:15
+    count: required|integer
+    size: required|string
+}
+response: {
+    200: {
+        data: {
+            id: number,
+            category_id: string,
+            name: string,
+            price: number,
+            description: string,
+            size: string,
+            count: number,
+            created_at: timestamp,
+            updated_at: timestamp
+        }
+    }
+    403: {
+         message: string
+    }
+    404: {
+         message: string
+    }
+    422: {
+        message: {
+            [field]: sting
+        }
+    }
+}
+```
+
+## delete
+
+```
+url: $baseUrl/product/{id}
+method: DELETE
+headers: {
+    authorization: $access_token
+}
+response: {
+    200: {
+        message: string
+    }
+    403: {
+         message: string
+    }
+    404: {
          message: string
     }
 }

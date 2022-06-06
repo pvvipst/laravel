@@ -19,6 +19,10 @@ Route::post('/signup', [App\Http\Controllers\API\UserController::class, 'signup'
 Route::post('/login', [App\Http\Controllers\API\UserController::class, 'login']);
 // ---- получение всех категорий
 Route::get('/category', [App\Http\Controllers\API\CategoryController::class, 'getAll']);
+// ---- получение всех товаров по категории
+Route::get('/category/product/{id}', [App\Http\Controllers\API\CategoryController::class, 'prodInCategory']);
+// ---- получение всех продуктов
+Route::get('/product', [App\Http\Controllers\API\ProductController::class, 'getAll']);
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/profile', function (Request $request) {
@@ -29,6 +33,12 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/category', [App\Http\Controllers\API\CategoryController::class, 'create']);
     Route::patch('/category/{id}', [App\Http\Controllers\API\CategoryController::class, 'update']);
     Route::delete('/category/{id}', [App\Http\Controllers\API\CategoryController::class, 'delete']);
+    // --------------
+
+    // ---- категории
+    Route::post('/product', [App\Http\Controllers\API\ProductController::class, 'create']);
+    Route::patch('/product/{id}', [App\Http\Controllers\API\ProductController::class, 'update']);
+    Route::delete('/product/{id}', [App\Http\Controllers\API\ProductController::class, 'delete']);
     // --------------
 
     // ---- выход
