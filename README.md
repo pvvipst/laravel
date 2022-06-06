@@ -429,8 +429,21 @@ headers: {
 response: {
     200: {
         data: {
-            product_id: number
-            count: number
+            items: {
+                product: {
+                    id: number,
+                    category_id: string,
+                    name: string,
+                    price: number,
+                    description: string,
+                    size: string,
+                    count: number,
+                    created_at: timestamp,
+                    updated_at: timestamp
+                }
+                count: string
+            }[]
+            status: number
         }[]
     }
     401: {

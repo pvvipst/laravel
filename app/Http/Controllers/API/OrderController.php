@@ -32,7 +32,7 @@ class OrderController extends Controller
             $arr2 = [];
             for ($j = 0; $j < count($ord) - 1; $j++) {
                 $tt = explode('=>', $ord[$j]);
-                $arr2[] = ['product_id' => $tt[0], 'count' => $tt[1]];
+                $arr2[] = ['product' => Product::find($tt[0]), 'count' => $tt[1]];
             }
             $arr[] = ['items' => $arr2, 'status' => $orders[$i]->status];
         }
