@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Library\ApiHelpers;
 use App\Models\Category;
 use App\Models\Product;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -14,7 +15,8 @@ class ProductController extends Controller
 {
     use ApiHelpers;
 
-    public function getAll() {
+    public function getAll(): JsonResponse
+    {
         $prod = DB::table('products')->get();
 
         for ($i = 0; $i < count($prod); $i++) {
@@ -24,7 +26,19 @@ class ProductController extends Controller
         return $this->onSuccess($prod);
     }
 
-    public function create(Request $request) {
+    public function getOne($id): JsonResponse
+    {
+        $prod = Product::find($id)->get();
+
+        for ($i = 0; $i < count($prod); $i++) {
+            $cat = Category::find($prod[$i]->category_id);
+            $prod[$i]->category_id = $cat->name;
+        }
+        return $this->onSuccess($prod);
+    }
+
+    public function create(Request $request): JsonResponse
+    {
         // проверка на одмина
         if ($this->isAdmin($request->user())) {
             // валидации
@@ -71,7 +85,8 @@ class ProductController extends Controller
         return $this->forbidden();
     }
 
-    public function update(Request $request, $id) {
+    public function update(Request $request, $id): JsonResponse
+    {
         if ($this->isAdmin($request->user())) {
             // валидации
             $validate = Validator::make($request->all(),
@@ -121,7 +136,8 @@ class ProductController extends Controller
         return $this->forbidden();
     }
 
-    public function delete(Request $request, $id) {
+    public function delete(Request $request, $id): JsonResponse
+    {
         if ($this->isAdmin($request->user())) {
             $prod = Product::find($id);
 

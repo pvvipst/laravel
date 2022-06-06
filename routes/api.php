@@ -23,6 +23,7 @@ Route::get('/category', [App\Http\Controllers\API\CategoryController::class, 'ge
 Route::get('/category/product/{id}', [App\Http\Controllers\API\CategoryController::class, 'prodInCategory']);
 // ---- получение всех продуктов
 Route::get('/product', [App\Http\Controllers\API\ProductController::class, 'getAll']);
+Route::get('/product/{id}', [App\Http\Controllers\API\ProductController::class, 'getOne']);
 // ---- feedback
 Route::post('/feedback', [App\Http\Controllers\API\FeedbackController::class, 'create']);
 

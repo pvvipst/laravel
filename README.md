@@ -274,6 +274,28 @@ response: {
 }
 ```
 
+## one
+
+```
+url: $baseUrl/product/{id}
+method: GET
+response: {
+    200: {
+        data: {
+            id: number,
+            category_id: string,
+            name: string,
+            price: number,
+            description: string,
+            size: string,
+            count: number,
+            created_at: timestamp,
+            updated_at: timestamp
+        }[]
+    }
+}
+```
+
 ## create
 
 ```
